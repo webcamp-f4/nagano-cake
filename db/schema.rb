@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_031438) do
 
-  create_table "items", force: :cascade do |t|
-    t.integer "genre_id"
-    t.string "name"
-    t.string "price"
-    t.string "image_id"
-    t.text "introduction"
-    t.boolean "sales_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
