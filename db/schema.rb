@@ -10,7 +10,80 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2020_07_02_044506) do
 
+  create_table "administrators", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.integer "item_id"
+    t.integer "amount"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.boolean "is_deleted"
+    t.string "last_name_kana"
+    t.string "first_name_kana"
+    t.text "address"
+    t.string "last_name_kanji"
+    t.string "first_name_kanji"
+    t.string "postal_code"
+    t.string "tel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.boolean "valid_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "name"
+    t.string "price"
+    t.string "image_id"
+    t.text "introduction"
+    t.boolean "sales_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "item_id"
+    t.integer "making_status"
+    t.integer "amount"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "pay_method"
+    t.integer "total_due"
+    t.integer "postage"
+    t.integer "status"
+    t.string "shipping_name"
+    t.string "shipping_postal_code"
+    t.text "shipping_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shippings", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "name"
+    t.string "postal_code"
+    t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
