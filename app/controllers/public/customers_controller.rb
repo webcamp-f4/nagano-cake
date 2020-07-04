@@ -4,7 +4,7 @@ class Public::CustomersController < ApplicationController
 	end
 
     def withdraw
-
+       @customer = Customer.find(params[:id])
     end
 
    def update
@@ -21,7 +21,14 @@ class Public::CustomersController < ApplicationController
    	@customer = Customer.find(params[:id])
    end
 
-   
+
+
+private
+
+def customer_params
+      params.require(:customer).permit(:last_name_kanji,:first_name_kanji ,:last_name_kana, :first_name_kana, :email, :postal_code, :address, :tel )
+end
+
 
 end
 
