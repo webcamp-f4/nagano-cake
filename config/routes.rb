@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-  	resources :cart_items
-  	resources :items
-  	resources :orders
+  	resources :cart_items, only: [:index, :update, :destroy]
+  	resources :items, only: [:index, :show]
+  	resources :orders, only: [:new, :create]
   	resources :customers
   	resources :shippings
   	get "orders/thanks" => "orders#thanks"
