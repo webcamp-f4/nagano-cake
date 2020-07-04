@@ -1,24 +1,23 @@
 class Public::CustomersController < ApplicationController
-	def show
+  def show
        @customer = Customer.find(params[:id])
-	end
+  end
 
     def withdraw
        @customer = Customer.find(params[:id])
     end
 
    def update
-   	@customer = Customer.find(params[:id])
+    @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      flash[:notice] = "successfully"
-      redirect_to public_path(@customer.id)
+      redirect_to public_customer_path(@customer.id)
     else
       render "edit"
     end
    end
 
    def edit
-   	@customer = Customer.find(params[:id])
+    @customer = Customer.find(params[:id])
    end
 
 
