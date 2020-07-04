@@ -5,15 +5,16 @@
 <table>
   <th>登録情報</th>
     <td></td>
-    <%= link_to edit_public_customer_path(@customer) do %>
-    <td class="btn btn-primary">
-      <span>編集する</span>
+    <td>
+      <%= link_to edit_public_customer_path(@customer) do %>
+        <span class="btn btn-primary">編集する</span>
+      <% end %>
     </td>
-    <% end %>
     <td></td>
-    <td class="btn btn-primary">
-      <span>パスワードを変更する</span>
-      <%= link_to edit_public_customer_path(@customer) do %><% end %>
+    <td>
+      <%= link_to edit_public_customer_path(@customer) do %>
+        <span class="btn btn-primary">パスワードを変更する</span>
+      <% end %>
     </td>
 </table>
 
@@ -24,7 +25,7 @@
     </tr>
     <tr>
       <td>カナ</td>
-      <td><%= @customer.last_name_kana %><%= @customer.last_name_kana %></td>
+      <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
     </tr>
     <tr>
       <td>郵便番号</td>

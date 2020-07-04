@@ -15,7 +15,7 @@
       <td>(セイ）</td>
       <td><%= f.text_field :last_name_kana %></td>
       <td>(メイ)</td>
-      <%= f.text_field :first_name_kana %></td>
+      <td><%= f.text_field :first_name_kana %></td>
     </tr>
     <tr>
       <th>メールアドレス</th>
@@ -37,8 +37,7 @@
       <td></td>
       <td><%= f.number_field :tel %></td>
     </tr>
-    <tr>
-      <%= f.submit '編集内容を保存する'%>
-    </tr>
 </table>
+<span><%= f.submit '編集内容を保存する'%></span>
+<span>退会する</span>
 <% end %>

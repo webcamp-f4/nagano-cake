@@ -1,6 +1,6 @@
 <p>管理者画面</p>
 <p>本日の注文件数&emsp;&emsp;
-   <%= link_to() do%>
-   <%= @order.count %>
+   <%= link_to admin_orders_path do %>
+   <%= @order.count %>件
    <% end %>   	
 </p>

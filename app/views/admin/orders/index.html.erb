@@ -12,20 +12,22 @@
 		<% @orders.each do |order| %>
 		<tr>
 			<td>
-				<%= order.created_at %>
+				<%= order.created_at.strftime("%Y-%m-%d %H:%M") %>
 			</td>
 			<td>
 				<%= order.customer.last_name_kanji %>
 				<%= order.customer.first_name_kanji %>
 			</td>
 			<td>
-				<%= %>
+				<%= order.order_item.amount %>
 			</td>
 			<td>
-				<%= order.status %>
+				<%= select :status, order.status.keys.to_a, {class: 'form-control'} %>
 			</td>
 		</tr>
 		<% end %>
 		<%= paginate @orders %>
 	</tbody>
 </table>
+
+<%= link_to "today", admin_orders_today_path %>
