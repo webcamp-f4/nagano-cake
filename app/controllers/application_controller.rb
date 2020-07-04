@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	# ログイン済ユーザーのみにアクセスを許可する
-	before_action :authenticate_customer!, except: [:top, :about]
+	
 	# deviseコントローラーにストロングパラメータを追加する
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	protect_from_forgery with: :exception
@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 		root_path(resource)
 	end
 
+	
 	protected
 		def configure_permitted_parameters
 			# サインアップ時にストロングパラメータを追加
