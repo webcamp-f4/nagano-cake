@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 		root_path(resource)
 	end
 
+	
 	protected
 		def configure_permitted_parameters
 			# サインアップ時にストロングパラメータを追加
