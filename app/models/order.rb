@@ -2,7 +2,6 @@ class Order < ApplicationRecord
 	belongs_to :customer
 	has_many :order_items
 
-	
 	enum status:{
 		入金待ち: 0,
 		入金確認: 1,
@@ -10,10 +9,13 @@ class Order < ApplicationRecord
 		発送準備中: 3,
 		発送済み: 4
 	}, _suffix: true
-	enum making_status:{
-		着手不可: 0,
-		製作待ち: 1,
-		製作中: 2,
-		製作完了: 3,
+
+	enum pay_method:{
+		クレジットカード: 0,
+		銀行振り込み: 1
 	}, _suffix: true
+
+	def total_price
+		order_items.to_a.sum { |item| item.total_price}
+	end
 end
