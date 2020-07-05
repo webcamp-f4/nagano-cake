@@ -42,7 +42,7 @@ def destroy
 end
 
 def shipping_params
-      params.require(:shipping).permit(:postal_code, :address, :name, )
+      params.require(:shipping).permit(:postal_code, :address, :name)
   end
 
 
