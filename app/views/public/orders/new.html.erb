@@ -1,2 +1,30 @@
-<h2>注文情報入力</h2>
+<h3>注文情報入力</h3>
+
+<%= form_with url:public_orders_path, method: :post do |f| %>
+
+	<h4>支払い方法</h4>
+	<% Order.pay_methods.each do |pay_method| %>
+		<%= f.radio_button :pay_method, pay_method[0] %>
+		<%= f.label ("#{pay_method[0]}") %>
+	<% end %>
+
+	<h4>お届け先</h4>
+
+	<div class="field">
+		<%= f.label "郵便番号（ハイフンなし）" %>
+		<%= f.text_field :shipping_name %>
+	</div>
+
+	<div class="field">
+		<%= f.label "住所" %>
+		<%= f.text_field :shipping_postal_code %>
+	</div>
+
+	<div class="field">
+		<%= f.label "宛名" %>
+		<%= f.text_field :shipping_address %>
+	</div>
+
+<% end %>
+
 <%=link_to "確認画面へ進む", public_orders_confirm_path, class: "btn btn-primary" %>

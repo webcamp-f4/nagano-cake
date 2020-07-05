@@ -14,7 +14,12 @@
 		<tr>
 			<td></td>
 			<td></td>
-			<td></td>
+			<td>
+				<%= form_for (@cart_item) do |f| %>
+					<%= f.text_field :amount %>
+					<%= f.submit "変更", class: "btn btn-primary" %>
+				<% end %>
+			</td>
 			<td></td>
 			<td>
 				<%=link_to "削除する", class: "btn btn-danger" %>
@@ -26,7 +31,7 @@
 <table class="table table-hover table-inverse">
 	<tr>
     	<th>合計金額</th>
-    	<td></td>
+    	<td><%= @cart_items.total_price %></td>
     </tr>
 </table>
 

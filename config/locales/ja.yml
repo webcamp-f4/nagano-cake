@@ -1,0 +1,6 @@
+ja:
+  enum:
+    order:
+      pay_method:
+        0: クレジットカード
+        1: 銀行振り込み
