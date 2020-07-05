@@ -13,11 +13,14 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def confirm
-		@order = Order.find_by(customer_id: params[:current_customer.id])
+		@order = Order.find_by(customer_id: current_customer)
 	end
 
 	private
 	def order_params
-		params.require(:order).permit(:pay_method, :total_due, :postage, :status, :shipping_name, :shipping_postal_code, :shipping_address)
+		params.require(:order).permit(:pay_method, :total_due,
+		 :postage, :status,
+		  :shipping_name, :shipping_postal_code,
+		   :shipping_address)
 	end
 end

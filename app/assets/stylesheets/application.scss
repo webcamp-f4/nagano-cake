@@ -63,6 +63,51 @@
 	margin: 0 auto;
 }
 
+.recommend-item-informaiton {
+	display: inline-block;
+}
+
+.recommend-item-name {
+	font-size: 15px;
+}
+
+.recommend-item-price {
+	font-size: 15px;
+}
+
+.recommend-item {
+	float: left;
+	width: 180px;
+	height: 150px;
+	background-size: cover;
+	background-position: center;
+	margin: 10px 10px 0 0;
+}
+
+.bg-1 {
+	background-image: url(img/recommend-cake.jpg);
+}
+
+.bg-2 {
+	background-image: url(img/recommend-baked_goods.jpg);
+}
+
+.bg-3 {
+	background-image: url(img/recommend-pudding.jpg);
+}
+
+.bg-4 {
+	background-image: url(img/recommend-candy.jpeg);
+}
+
+.recommend-item:nth-child(4) {
+	margin-right: 0;
+}
+
+.more-items {
+	text-align: right;
+}
+
 .genre_search {
 	margin-bottom: 20px;
 }

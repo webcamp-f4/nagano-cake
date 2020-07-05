@@ -10,6 +10,6 @@ class OrderItem < ApplicationRecord
 	}, _suffix: true
 
 	def total_price
-		OrderItem.all.sum(:price)
+		price * amount
 	end
 end
