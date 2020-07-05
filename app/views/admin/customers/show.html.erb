@@ -1,0 +1,41 @@
+<span>
+	<%= customer.last_name_kanji %><%= customer.first_name_kanji %>さんの会員詳細
+</span>
+<div>
+    <div>顧客ID</div>
+    <div>氏名</div>
+    <div>フリガナ</div>
+    <div>郵便番号</div>
+    <div>住所</div>
+    <div>電話番号</div>
+    <div>メールアドレス</div>
+    <div>
+    	<%= link_to "編集する", edit_admin_customer_path(@customer) %>
+    </div>
+</div>
+<div>
+	<div>
+		<%= @customer.id %>&ensp;<%= @customer.is_deleted %>
+	</div>
+	<div>
+		<%= customer.last_name_kanji %>&emsp;<%= customer.first_name_kanji %>
+	</div>
+	<div>
+		<%= customer.last_name_kana %>&emsp;<%= customer.first_name_kana %>
+	</div>
+	<div>
+		<%= @customer.postal_code %>
+	</div>
+	<div>
+		<%= @customer.address %>
+	</div>
+	<div>
+		<%= @customer.tel %>
+	</div>
+	<div>
+		<%= @customer.email %>
+	</div>
+	<div>
+		<%= link_to "注文履歴一覧を見る", admin_arders_path %>
+	</div>
+</div>
