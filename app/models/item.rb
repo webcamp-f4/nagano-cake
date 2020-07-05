@@ -6,5 +6,10 @@ class Item < ApplicationRecord
 	has_many :cart_items, dependent: :destroy
 	has_many :order_items, dependent: :destroy
 
-	attachment :profile_image
+	attachment :image
+
+	enum sales_status:{
+		売り切れ: false,
+		販売中: true
+	}, _suffix: true
 end
