@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :administrators
-  devise_for :customers
+  devise_for :administrators, :controllers => {
+    :sessions => 'administrators/sessions'
+}
+  devise_for :customers, :controllers => {
+    :sessions => 'customers/sessions'
+}
+
+    devise_scope :customer do
+    get 'customers/admin' => 'customers/sessions#admin'
+    end
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "homes#top"
   get "/about" => "homes#about"
