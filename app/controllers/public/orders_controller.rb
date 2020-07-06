@@ -13,7 +13,9 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def confirm
-		@order = Order.find_by(customer_id: current_customer)
+		@order = Order.new
+		@cart_items = current_customer.cart_items
+		@items = @cart_items.items
 	end
 
 	private
