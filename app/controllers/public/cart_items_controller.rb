@@ -14,11 +14,12 @@ class Public::CartItemsController < ApplicationController
 
 	def update
 		@cart_item = CartItem.find(params[:id])
+		@cart_item.update(cart_item_params)
 		redirect_to request.referer
 	end
 
 	def destroy
-		@cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
+		cart_item = CartItem.find(params[:id])
 		@cart_item.destroy
 		redirect_to request.referer
 	end
@@ -30,7 +31,8 @@ class Public::CartItemsController < ApplicationController
 
 	private
 	def cart_item_params
-		params.require(:cart_items).permit(:amount)
+		params.require(:cart_items).permit(:customer_id, :item_id, :amount)
+	end
 
 	def calculate(customer)
 		total_price = 0
