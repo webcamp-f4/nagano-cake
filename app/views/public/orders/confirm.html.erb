@@ -9,11 +9,15 @@
 					<th>単価（税込）</th>
 					<th>数量</th>
 					<th>小計</th>
-					<th></th>
 				</tr>
 			</thead>
-
 			<tbody>
+				<tr>
+					<td><%= @items.name %></td>
+					<td><%= @items.price %></td>
+					<td><%= @cart_items.amount %></td>
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

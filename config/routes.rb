@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :public do
   	resources :cart_items, only: [:index, :create, :update, :destroy]
   	resources :items, only: [:index, :show]
-  	resources :orders, only: [:new, :create, :index, :show]
+  	resources :orders, only: [:new, :create, :index]
   	resources :customers, only: [:show, :update, :edit]
   	resources :shippings, only: [:index, :create, :destroy, :edit, :update]
   	get "orders/thanks" => "orders#thanks"
