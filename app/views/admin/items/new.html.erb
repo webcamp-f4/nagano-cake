@@ -1,8 +1,11 @@
 <p>商品新規登録</p>
-<%= form_for new_admin_item_path(@item) do |f| %>
+<%= form_for @item,:url => {:action => :create} do |f| %>
 <div>
     <div>
-        <%= f.label :image %>
+        <label>商品画像</label>
+        <div class="item-image">
+        <%= attachment_image_tag @item, :image, class: "img-square", fallback: "img/no_image.jpg", size:"300x300" %>
+      　</div>
         <%= f.attachment_field :image %>
     </div>
 </div>
@@ -17,7 +20,7 @@
     </div>
     <div>
         <label>ジャンル</label>
-        <%= select :genre.valid_status, @item.genre.valid_status.keys.to_a, {class: 'form-control'} %>
+        <%= f.collection_select(:name, Genre.all, :id, :name, promote: "選択してください") %>
     </div>
     <div>
         <label>税抜価格</label>
@@ -25,10 +28,30 @@
     </div>
     <div>
         <label>販売ステータス</label>
-        <%= select :sales_status, @item.sales_status.keys.to_a, {class: 'form-control'} %>
+        <%= f.select :sales_status, Item.sales_statuses.keys.to_a, {class: 'form-control'} %>
+        
     </div>
 </div>
 <div>
     <%= f.submit %>
 </div>
 <% end %>
+
+
+
+<script type="text/javascript">
+$(function(){
+    // inputのidから情報の取得
+    $('#item_image').on('change', function (e) {
+// ここから既存の画像のurlの取得
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        console.log(e.target.result)
+        $(".image").attr('src', e.target.result);
+    }
+// ここまで
+    reader.readAsDataURL(e.target.files[0]); //取得したurlにアップロード画像のurlを挿入
+});
+});
+
+</script>

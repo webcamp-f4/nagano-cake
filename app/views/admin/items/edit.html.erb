@@ -17,7 +17,7 @@
     </div>
     <div>
         <label>ジャンル</label>
-        <%=　select :genre.valid_status, item.genre.valid_status.keys.to_a, {class: 'form-control' %>
+        <%= f.collection_select(:name, Genre.all, :genre_name, :genre_name %>
     </div>
     <div>
         <label>税抜価格</label>
@@ -25,7 +25,7 @@
     </div>
     <div>
         <label>販売ステータス</label>
-        <%=　elect :sales_status, item.sales_status.keys.to_a, {class: 'form-control' %>
+        <%= f.select :sales_status, Item.sales_statuses.keys.to_a, {class: 'form-control'} %>
     </div>
 </div>
 <div>
