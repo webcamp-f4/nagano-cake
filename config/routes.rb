@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "/about" => "homes#about"
   
   namespace :public do
-  	resources :cart_items, only: [:index, :update, :destroy]
+  	resources :cart_items, only: [:index, :create, :update, :destroy]
   	resources :items, only: [:index, :show]
   	resources :orders, only: [:new, :create, :index, :show]
   	resources :customers, only: [:show, :update, :edit]
