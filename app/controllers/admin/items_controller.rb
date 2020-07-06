@@ -11,7 +11,7 @@ class Admin::ItemsController < ApplicationController
 		@item = Item.new(item_params)
 		@items = Item.all
         if @item.save 
-          render :index
+          rendeirect_to @item
         else
         redirect_back(fallback_location: admin_items_path)
         end
@@ -27,6 +27,6 @@ class Admin::ItemsController < ApplicationController
 
 	private
     def item_params
-    params.permit(:price, :image, :introduction, :sales_status)
+    params.require(:item).permit(:name, :price, :image, :introduction, :sales_status)
     end
 end
