@@ -15,4 +15,8 @@ class Admin::GenresController < ApplicationController
 		   render :index
 		end
 	end
+	private
+    def item_params
+    params.require(:item).permit(:name, :valid_status)
+    end
 end

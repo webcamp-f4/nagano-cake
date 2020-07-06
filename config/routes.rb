@@ -15,20 +15,12 @@ Rails.application.routes.draw do
   root "homes#top"
   get "/about" => "homes#about"
   
-  namespace :admin do
-    resources :items
-    resources :customers
-    resources :genres
-    resources :orders
-    get "orders/today" => "orders#today"
-  end
-
   namespace :public do
   	resources :cart_items, only: [:index, :update, :destroy]
   	resources :items, only: [:index, :show]
-  	resources :orders, only: [:new, :create]
-  	resources :customers
-  	resources :shippings
+  	resources :orders, only: [:new, :create, :index, :show]
+  	resources :customers, only: [:show, :update, :edit]
+  	resources :shippings, only: [:index, :create, :destroy, :edit, :update]
   	get "orders/thanks" => "orders#thanks"
   	delete "cart_items/destroy_all" => "cart_items#destroy_all"
   	get "customers/:id/withdraw" => "customers#withdraw"
@@ -36,5 +28,12 @@ Rails.application.routes.draw do
   	get "orders/confirm" => "orders#confirm"
   end
 
+  namespace :admin do
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :orders, only: [:index, :show, :update]
+    get "orders/today" => "orders#today"
+  end
 
 end
