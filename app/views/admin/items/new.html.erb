@@ -20,7 +20,7 @@
     </div>
     <div>
         <label>ジャンル</label>
-        <%= f.collection_select(:name, Genre.all, :genre_name, :genre_name, promote: "選択してください") %>
+        <%= f.collection_select(:name, Genre.all, :id, :name, promote: "選択してください") %>
     </div>
     <div>
         <label>税抜価格</label>

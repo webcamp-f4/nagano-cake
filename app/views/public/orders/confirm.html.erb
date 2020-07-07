@@ -2,6 +2,7 @@
 
 <div class="row">
 	<div class = "col-xs-9">
+		<!--注文商品の情報-->
 		<table class="table table-hover table-inverse">
 			<thead>
 				<tr>
@@ -11,30 +12,37 @@
 					<th>小計</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr>
-					<td><%= @items.name %></td>
-					<td><%= @items.price %></td>
-					<td><%= @cart_items.amount %></td>
-					<td></td>
-				</tr>
+				<% current_customer.cart_items.each do |cart| %>
+					<tr>
+						<td>
+							<%= attachment_image_tag cart.items, :image, :size => '50×50', fallback: "no_image.jpg" %>
+							<%= cart.items.name %>
+						</td>
+						<td><%= (cart.items.price * 1.1).floor %></td>
+						<td><%= cart.amount %></td>
+						<td><%= (cart.items.price * 1.1).floor * cart.amount %></td>
+					</tr>
+				<% end %>
 			</tbody>
 		</table>
 	</div>
 
 	<div class = "col-xs-3">
+		<!--金額の情報-->
 		<table class="table table-hover table-inverse">
 			<tr>
 		    	<th>送料</th>
-		    	<td></td>
+		    	<td>800</td>
 		    </tr>
 		    <tr>
 		    	<th>商品合計</th>
-		    	<td></td>
+		    	<td><%= @total_price %></td>
 		    </tr>
 		    <tr>
 		    	<th>請求金額</th>
-		    	<td></td>
+		    	<td><%= @total_price + 800 %></td>
 		    </tr>
 		</table>
 	</div>
@@ -42,17 +50,17 @@
 
 <div class="row">
 	<div class = "col-xs-9">
-		<table class="table">
-			<tr>
-		    	<th>支払方法</th>
-		    	<td></td>
-		    </tr>
-		    <tr>
-		    	<th>お届け先</th>
-		    	<td></td>
-		    </tr>
-		</table>
+		<strong>お支払い方法</strong>
+		<%= session[:pay_method] %><br>
+		<strong>お届け先</strong>
+		<!-- うけとった文字列が8けたより少なければ -->
+		<% if  session[:address].length < 8 %>
+			<%= @address.postal_code + "  " + @address.address + "  " + @address.name %>
+		<!-- 受け取った文字列がそれ以外なら -->
+		<% else %>
+			<%= session[:address] %>
+		<% end %>
 	</div>
 </div>
 
-<%=link_to "購入を確定する", public_orders_thanks_path, class: "btn btn-success" %>
+<%=link_to "購入を確定する", public_orders_create_order_path, class: "btn btn-success" %>
