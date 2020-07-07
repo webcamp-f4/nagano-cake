@@ -15,7 +15,6 @@ class Order < ApplicationRecord
 		銀行振り込み: 1
 	}, _suffix: true
 
-	def total_price
-		order_items.to_a.sum { |item| item.total_price}
-	end
+	validates :pay_method, presence: true
+	validates :shipping_address, presence: true
 end
