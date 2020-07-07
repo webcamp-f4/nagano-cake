@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   	resources :cart_items, only: [:index, :create, :update, :destroy]
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
   	resources :items, only: [:index, :show]
-  	resources :orders, only: [:new, :create, :index]
+  	resources :orders, only: [:new, :create]
     post '/orders/create_shipping' => 'orders#create_shipping' #情報入力画面での配送先登録用のアクション
     get "orders/confirm" => "orders#confirm"
     get '/orders/create_order' => 'orders#create_order' #購入確定のアクション

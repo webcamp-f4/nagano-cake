@@ -1,13 +1,12 @@
 class Public::OrdersController < ApplicationController
 	def new
-		@order = Order.new
 		@shippings = current_customer.shippings
 		@shipping = Shipping.new
+		@order = Order.new
 	end
 
 	#注文情報入力画面でボタンを押して情報をsessionに保存
 	def create
-		@order = Order.new(order_params)
 		session[:pay_method] = params[:pay_method]
 		if params[:select] == "my_address"
 			session[:address] = current_customer.postal_code + 
@@ -28,13 +27,16 @@ class Public::OrdersController < ApplicationController
 		@shipping = Shipping.new(shipping_params)
 		@shipping.customer_id = current_customer.id
 		@shipping.save
-		redirect_to public_orders_confirm_path
+		redirect_to new_public_order_path
 	end
 
 	#注文情報確認画面
 	def confirm
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
+		if  session[:address].length <8
+        	@address = Shipping.find(session[:address])
+      	end
 	end
 
 	def thanks
@@ -69,11 +71,6 @@ class Public::OrdersController < ApplicationController
 	private
 	def shipping_params
 		params.require(:shipping).permit(:customer_id, :name, :postal_code, :address)
-	end
-
-	def order_params
-		params.require(:order).permit(:pay_method, :total_due,
-		 :postage, :status)
 	end
 
 	def calculate(customer)

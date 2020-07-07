@@ -53,7 +53,13 @@
 		<strong>お支払い方法</strong>
 		<%= session[:pay_method] %><br>
 		<strong>お届け先</strong>
-		<%= session[:address] %>
+		<!-- うけとった文字列が8けたより少なければ -->
+		<% if  session[:address].length < 8 %>
+			<%= @address.postal_code + "  " + @address.address + "  " + @address.name %>
+		<!-- 受け取った文字列がそれ以外なら -->
+		<% else %>
+			<%= session[:address] %>
+		<% end %>
 	</div>
 </div>
 
