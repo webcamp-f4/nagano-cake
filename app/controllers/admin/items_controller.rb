@@ -5,13 +5,14 @@ class Admin::ItemsController < ApplicationController
 
 	def new
 		@item = Item.new
+		@genre = Genre.all
 	end
 
 	def create
 		@item = Item.new(item_params)
 		@items = Item.all
         if @item.save 
-          rendeirect_to @item
+          redeirect_to admin_items_path
         else
         redirect_back(fallback_location: admin_items_path)
         end

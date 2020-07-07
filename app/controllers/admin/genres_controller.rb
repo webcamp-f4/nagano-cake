@@ -7,7 +7,7 @@ class Admin::GenresController < ApplicationController
 		@genre = Genre.find(params[:id])
 	end
 	def create
-		@genre = Genre.new
+		@genre = Genre.new(genre_params)
 		@genres = Genre.all
 		if @genre.save
 		   redirect_back(fallback_location: root_path)
@@ -15,8 +15,18 @@ class Admin::GenresController < ApplicationController
 		   render :index
 		end
 	end
+    def update
+        @genre = Genre.find(params[:id])
+          if @genre.update(genre_id)
+             redirect_to admin_genres_path, notice: "successfully updated user!"
+          else
+             render :edit
+          end
+    end
+
+
 	private
-    def item_params
-    params.require(:item).permit(:name, :valid_status)
+    def genre_params
+    params.require(:genre).permit(:name, :valid_status)
     end
 end
