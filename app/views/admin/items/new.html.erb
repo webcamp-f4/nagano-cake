@@ -1,5 +1,5 @@
 <p>商品新規登録</p>
-<%= form_for [:admin, @item] do |f| %>
+<%= form_for @item,:url => {:action => :create} do |f| %>
 <div>
     <div>
         <label>商品画像</label>
@@ -20,6 +20,7 @@
     </div>
     <div>
         <label>ジャンル</label>
+
         <%= f.collection_select(:genre_id, Genre.all, :id, :name, promote: "選択してください") %>
     </div>
     <div>

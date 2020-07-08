@@ -12,12 +12,17 @@
 					<th>小計</th>
 				</tr>
 			</thead>
-
 			<tbody>
+				<tr>
+					<td><%= @items.name %></td>
+					<td><%= @items.price %></td>
+					<td><%= @cart_items.amount %></td>
+					<td></td>
+				</tr>
 				<% current_customer.cart_items.each do |cart| %>
 					<tr>
 						<td>
-							<%= attachment_image_tag cart.items, :image, :size => '50×50', fallback: "no_image.jpg" %>
+							<%= attachment_image_tag cart.items, :image, :size => '50×50', fallback: "img/no-image-mini.jpg" %>
 							<%= cart.items.name %>
 						</td>
 						<td><%= (cart.items.price * 1.1).floor %></td>

@@ -1,5 +1,9 @@
 class Public::CartItemsController < ApplicationController
 
+
+
+
+
 	def index
 		@cart_items = current_customer.cart_items
 		@total_price = calculate(current_customer)
@@ -16,6 +20,7 @@ class Public::CartItemsController < ApplicationController
 		@cart_item.save
 		redirect_to public_cart_items_path
 	    end
+
 	end
 
 	def update
@@ -26,7 +31,7 @@ class Public::CartItemsController < ApplicationController
 
 	def destroy
 		cart_item = CartItem.find(params[:id])
-		@cart_item.destroy
+		cart_item.destroy
 		redirect_to request.referer
 	end
 
@@ -35,16 +40,20 @@ class Public::CartItemsController < ApplicationController
 		redirect_to request.referer
 	end
 
+
 	private
+
 	def cart_item_params
-		params.require(:cart_items).permit(:customer_id, :item_id, :amount)
-	end
+		params.require(:cart_item).permit(:item_id, :amount, :customer_id)
+    end
+
 
 	def calculate(customer)
-		total_price = 0
-		customer.cart_items.each do |cart_item|
-			total_price = total_price + (cart_item.amount * cart_item.item.price)
+		  total_price = 0
+		  customer.cart_items.each do |cart_item|
+			total_price += cart_item.amount * cart_item.item.price.to_i
 		end
 		return (total_price * 1.1).floor
-	end
-end
+    end
+
+  end

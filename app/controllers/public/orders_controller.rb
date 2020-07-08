@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+
+
 	def new
 		@shippings = current_customer.shippings
 		@shipping = Shipping.new
