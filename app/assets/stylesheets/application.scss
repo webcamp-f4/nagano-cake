@@ -15,3 +15,95 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.navbar-brand-center {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	padding-top: 25px;
+	text-align:center;
+	margin: auto;
+}
+
+#top {
+	width: 80%;
+	height: 300px;
+	color: #000000;
+	background-image: url(img/cake.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.top-text {
+	padding-top: 100px;
+	text-align: center;
+}
+
+#thanks {
+	margin-top: 250px;
+	text-align: center;
+}
+
+#about {
+	text-align: center;
+}
+
+.about-image {
+	width: 50%;
+	height: 300px;
+	background-image: url(img/cake_shop.jpg);
+	background-size: cover;
+	background-position: center;
+	margin: 0 auto;
+}
+
+.recommend-item-informaiton {
+	display: inline-block;
+}
+
+.recommend-item-name {
+	font-size: 15px;
+}
+
+.recommend-item-price {
+	font-size: 15px;
+}
+
+.recommend-item {
+	float: left;
+	width: 180px;
+	height: 150px;
+	background-size: cover;
+	background-position: center;
+	margin: 10px 10px 0 0;
+}
+
+.bg-1 {
+	background-image: url(img/recommend-cake.jpg);
+}
+
+.bg-2 {
+	background-image: url(img/recommend-baked_goods.jpg);
+}
+
+.bg-3 {
+	background-image: url(img/recommend-pudding.jpg);
+}
+
+.bg-4 {
+	background-image: url(img/recommend-candy.jpeg);
+}
+
+.recommend-item:nth-child(4) {
+	margin-right: 0;
+}
+
+.more-items {
+	text-align: right;
+}
