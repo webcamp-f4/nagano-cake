@@ -14,20 +14,17 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><%= @items.name %></td>
-					<td><%= @items.price %></td>
-					<td><%= @cart_items.amount %></td>
-					<td></td>
+					
 				</tr>
-				<% current_customer.cart_items.each do |cart| %>
+				<% current_customer.cart_items.each do |cart_item| %>
 					<tr>
 						<td>
-							<%= attachment_image_tag cart.items, :image, :size => '50×50', fallback: "img/no-image-mini.jpg" %>
-							<%= cart.items.name %>
+							<%= attachment_image_tag cart_item.item, :image, size: "50×50", fallback: "img/no-image-mini.jpg" %>
+							<%= cart_item.item.name %>
 						</td>
-						<td><%= (cart.items.price * 1.1).floor %></td>
-						<td><%= cart.amount %></td>
-						<td><%= (cart.items.price * 1.1).floor * cart.amount %></td>
+						<td><%= (cart_item.item.price.to_i * 1.1).floor %></td>
+						<td><%= cart_item.amount %></td>
+						<td><%= (cart_item.item.price.to_i * 1.1).floor * cart_item.amount %></td>
 					</tr>
 				<% end %>
 			</tbody>
