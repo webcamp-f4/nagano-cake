@@ -77,9 +77,9 @@ class Public::OrdersController < ApplicationController
 
 	def calculate(customer)
 		total_price = 0
-		customer.cart_items.each do |cart|
-			total_price = total_price + (cart.amount * cart.items.price)
+		customer.cart_items.each do |cart_item|
+			total_price = total_price + (cart_item.amount * cart_item.items.price)
 		end
-		return (total_price * 1.1).floor
+		(total_price * 1.1).floor
 	end
 end

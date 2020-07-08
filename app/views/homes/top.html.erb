@@ -16,17 +16,15 @@
 	<section id="recommend-items">
 		<h3>オススメ商品<h3>
 			<% @random.each do |item| %>
-			<div>
-			    <%= link_to public_item_path(item) do %>
-			      <%= attachment_image_tag(item, :image, class: "img-square",fallback: "img/no-image-mini.jpg",size:"300x300") %>
-                <% end %>
-            </div>
-            <div>
-                <%= item.name %>
-            </div>
-            <div>
-                <%= (item.price.to_i*1.10).floor %>円
-            </div>
+				<div>
+				    <%= link_to public_item_path(item) do %>
+				      <%= attachment_image_tag(item, :image, fallback: "img/no-image-mini.jpg",size:"150x100") %>
+				      <%= item.name %>
+	                <% end %>
+	            </div>
+	            <div>
+	                <%= (item.price.to_i*1.10).floor %>円
+	            </div>
             <% end %>
 	</section>
 

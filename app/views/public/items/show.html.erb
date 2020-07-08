@@ -3,20 +3,23 @@
 </div>
 
 <div class="col-xs-9">
-	<%= attachment_image_tag(@item, :image, class: "img-square",fallback: "img/no-image-mini.jpg",size:"300x300") %>
-	<%= @item.name %>
-	<%= @item.introduction %>
-	<%= @item.price %>
+  <div>
+    <%= attachment_image_tag(@item, :image,fallback: "img/no-image-mini.jpg",size:"300x200") %>
+  </div>
+  <div>
+  	<%= @item.name %><br>
+  	<%= @item.introduction %><br>
+  	¥<%= (@item.price.to_i * 1.1).floor %>（税込）
+  </div>
 
-
-          <%= form_for [:public, @cart_item] do |f| %>
-            <%= f.number_field :amount, min:1, placeholder: "個数選択" %><span>個</span>
-            <%= f.hidden_field :item_id, :value => @item.id %>
-            <%= f.submit "カートに入れる", class: "btn btn-outline-danger" %>
-      　　<% end %>
+    <%= form_for [:public, @cart_item] do |f| %>
+      <%= f.number_field :amount, min:1, placeholder: "個数選択" %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+　　<% end %>
         </div>
 
-        <div class="row">
-          <%= flash[:into_cart_error] %>
-        </div>
+    <div class="row">
+      <%= flash[:into_cart_error] %>
+    </div>
 
