@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
 	def today	
-		@order = Oreder.all
+		@order = Order.all
 		   @order.each do |order|
 		   	if (order[created_at].to_s.match(/#{Date.today.to_s}.+/))
 		   		@date += order[:id]
