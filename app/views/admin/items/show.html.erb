@@ -17,7 +17,7 @@
     </div>
     <div>
         <label>税込価格(税抜価格)</label>
-        <%= @item.price*1.10 %>(<%= @item.price %>)
+        <%= (@item.price.to_i*1.10).floor %>(<%= @item.price %>)
     </div>
     <div>
         <label>販売ステータス</label>
@@ -25,5 +25,5 @@
     </div>
 </div>
 <div>
-    <%= link_to "編集する", item_edit_path %>
+    <%= link_to "編集する", edit_admin_item_path %>
 </div>
