@@ -1,12 +1,12 @@
 <p>ジャンル編集</p>
 <div>
-	<%= form_for admin_genres_path(@genre) do |f| %>
+	<%= form_for [:admin, @genre] do |f| %>
 	<div>
 		<label>ジャンル</label>
 		<%= f.text_field :name %>
 	</div>
 	<div>
-		<%= select :valid_status, genre.valid_status.keys.to_a, {class: 'form-control'} %>
+		<%= f.select :valid_status, Genre.valid_statuses.keys.to_a, {class: 'form-control'} %>
 	</div>
 	<div>
 		<%= f.submit %>
