@@ -1,0 +1,29 @@
+<p>商品詳細</p>
+<div>
+    <%= attachment_image_tag @item, :image, class: "img-square", fallback: "img/no_image.jpg", size:"300x300" %>
+</div>
+<div>
+    <div>
+        <label>商品名</label>
+        <%= @item.name %>
+    </div>
+    <div>
+        <label>商品説明</label>
+        <%= @item.introduction %>
+    </div>
+    <div>
+        <label>ジャンル</label>
+        <%= @item.genre.name %>
+    </div>
+    <div>
+        <label>税込価格(税抜価格)</label>
+        <%= @item.price*1.10 %>(<%= @item.price %>)
+    </div>
+    <div>
+        <label>販売ステータス</label>
+        <%= @item.sales_status %>
+    </div>
+</div>
+<div>
+    <%= link_to "編集する", item_edit_path %>
+</div>

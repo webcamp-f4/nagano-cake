@@ -1,0 +1,51 @@
+<div class="col-xs-5">
+<h1>配送先登録/一覧</h1>
+
+<%= form_for @shipping,:url => {:action => :create} do |f| %>
+
+<table>
+    <tr>
+      <th>郵便番号(ハイフンなし)</th>
+      <td></td>
+      <td><%= f.text_field :postal_code %></td>
+    </tr>
+    <tr>
+      <th>住所</th>
+      <td></td>
+      <td><%= f.text_area :address %></td>
+    </tr>
+    <tr>
+      <th>宛名</th>
+      <td></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+
+</table>
+<%= f.submit '登録する', class:"btn btn-primary col-xs-2" %>
+
+<% end %>
+
+<% @shippings.each do |shipping| %>
+
+
+<table border="col-xs-7" width="500" height="100" >
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th>
+        <%= link_to edit_public_shipping_path(shipping) do %>
+          <span class="btn btn-primary">編集する</span>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th><%= shipping.postal_code %></th>
+      <th><%= shipping.address %></th>
+      <th><%= shipping.name%></th>
+      <th></th>
+    </tr>
+</table>
+
+<% end %>
+</div>

@@ -1,0 +1,17 @@
+<div class="center-block">
+
+  <h1 align=center>本当に退会しますか？</h1>
+
+    <h2 align=center>退会すると会員登録情報やこれまでの購入履歴が閲覧できなくなります。
+    退会する場合は、「退会する」をクリックしてください。</h2>
+
+
+<div>
+  <%= link_to public_customer_path(@customer) do %>
+    <span class="btn btn-primary">退会しない</span>
+  <% end %>
+
+  <%= link_to public_customer_path(@customer) do %>
+        <span class="btn btn-primary">退会する</span>
+  <% end %>
+</div>
