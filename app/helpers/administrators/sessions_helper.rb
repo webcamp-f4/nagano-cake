@@ -1,2 +1,0 @@
-module Administrators::SessionsHelper
-end
