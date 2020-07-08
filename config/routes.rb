@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 #customer
   namespace :public do
   	resources :cart_items, only: [:index, :create, :update, :destroy]
+
     get "cart_items/destroy_all" => "cart_items#destroy_all"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
+
   	resources :items, only: [:index, :show]
     resources :genres, only: [:index] do
       resources :items, only: [:index]
