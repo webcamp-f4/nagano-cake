@@ -8,8 +8,14 @@ class Public::CartItemsController < ApplicationController
 	def create
 		@cart_item = CartItem.new(cart_item_params)
 		@cart_item.customer_id = current_customer.id
+		@validate_into_cart = @cart_item.validate_into_cart
+		if @validate_into_cart == false
+			flash[:into_cart_error] = "error"
+			redirect_to item_path(params[:cart_item][:item_id])
+		else
 		@cart_item.save
 		redirect_to public_cart_items_path
+	    end
 	end
 
 	def update
