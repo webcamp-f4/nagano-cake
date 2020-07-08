@@ -11,7 +11,7 @@ class Public::OrdersController < ApplicationController
 	def create
 		session[:pay_method] = params[:pay_method]
 		if params[:select] == "my_address"
-			session[:address] = current_customer.postal_code + 
+			session[:address] = current_customer.postal_code +
 			current_customer.address + current_customer.last_name_kanji + current_customer.first_name_kanji
 		elsif params[:select] == "select_address"
 			session[:address] = params[:address]
@@ -24,6 +24,8 @@ class Public::OrdersController < ApplicationController
 		end
 	end
 
+
+
 	#注文情報入力画面にて新規配送先の登録
 	def create_shipping
 		@shipping = Shipping.new(shipping_params)
@@ -34,6 +36,7 @@ class Public::OrdersController < ApplicationController
 
 	#注文情報確認画面
 	def confirm
+	#	@items = Item.find(params[:id])
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
 		if  session[:address].length <8
@@ -59,7 +62,7 @@ class Public::OrdersController < ApplicationController
 		current_customer.cart_items.each do |cart_item|
 			@order_item = OrderItem.new
 			@order_item.order_id = @order.id
-			@order_item.price = cart_item.items.price
+			@order_item.price = cart_item.item.price.to_i
 			@order_item.amount = cart_item.amount
 			@order_item.making_status = 0
 			@order_item.save
@@ -75,11 +78,15 @@ class Public::OrdersController < ApplicationController
 		params.require(:shipping).permit(:customer_id, :name, :postal_code, :address)
 	end
 
+	def cart_item_params
+		params.require(:cart_item).permit(:item_id, :amount, :customer_id)
+    end
+
 	def calculate(customer)
 		total_price = 0
 		customer.cart_items.each do |cart_item|
-			total_price = total_price + (cart_item.amount * cart_item.items.price)
+			total_price += cart_item.amount * cart_item.item.price.to_i
 		end
-		(total_price * 1.1).floor
+		return (total_price * 1.1).floor
 	end
 end

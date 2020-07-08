@@ -1,5 +1,6 @@
 class Public::CartItemsController < ApplicationController
 
+
 	def index
 		@cart_items = current_customer.cart_items
 		@total_price = calculate(current_customer)
@@ -11,7 +12,7 @@ class Public::CartItemsController < ApplicationController
 		@validate_into_cart = @cart_item.validate_into_cart
 		if @validate_into_cart == false
 			flash[:into_cart_error] = "error"
-			redirect_to public_item_path(params[:cart_item][:item_id])
+			redirect_to item_path(params[:cart_item][:item_id])
 		else
 		@cart_item.save
 		redirect_to public_cart_items_path
