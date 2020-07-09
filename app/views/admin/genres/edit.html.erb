@@ -1,15 +1,26 @@
-<p>ジャンル編集</p>
-<div>
-	<%= form_for [:admin, @genre] do |f| %>
-	<div>
-		<label>ジャンル</label>
+<div class="row">
+<div class="col-xs-8 col-xs-offset-2">
+<p class="admin-page-title-genre">ジャンル編集</p>
+<div class="genre-new row">
+	<%= form_for @genre,:url => {:action => :update} do |f| %>
+	<div class="col-xs-2 text-right">
+		<label>ジャンル</label>		
+	</div>
+	<div class="col-xs-3">
 		<%= f.text_field :name %>
 	</div>
-	<div>
-		<%= f.select :valid_status, Genre.valid_statuses.keys.to_a, {class: 'form-control'} %>
+	<div class="col-xs-2">
+		<label>
+			<%= f.radio_button :valid_status, 1 %>有効
+		</label>
+		<label>
+			<%= f.radio_button :valid_status, 0 %>無効
+		</label>
 	</div>
-	<div>
-		<%= f.submit %>
+	<div class="col-xs-2">
+		<%= f.submit '変更を保存する',{class: 'btn btn-info'} %>
 	</div>
 	<% end %>
+</div>
+</div>
 </div>

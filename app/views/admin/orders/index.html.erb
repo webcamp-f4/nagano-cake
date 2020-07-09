@@ -1,7 +1,7 @@
-<span>注文履歴一覧</span>
-<table class="table table-hover table-inverse">
-	<thead>
-		<tr>
+<span class="admin-page-title ">注文履歴一覧</span>
+<table class="table table-hover table-inverse admin-order-index">
+	<thead class="active">
+		<tr class="active">
 			<th>購入日時</th>
 			<th>購入者</th>
 			<th>注文個数</th>
@@ -29,5 +29,3 @@
 		<%= paginate @orders %>
 	</tbody>
 </table>
-
-<%= link_to "today", admin_orders_today_path %>
