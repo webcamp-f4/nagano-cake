@@ -1,14 +1,12 @@
-<div class="row">
-	<h4>注文情報入力</h4>
-		<%= flash[:order_new] %>
-</div>
+<h2>注文情報入力</h2>
+	<div style="color: red;"><%= flash[:order_new] %></div>
 
 <div class="row">
-	<div class= "col-xs-6">
+	<div class= "col-md-6">
 		<h4>支払い方法</h4>
 			<%= form_tag(public_orders_path, method: :post) do %>
 				<%= radio_button_tag :pay_method, :クレジットカード %>
-				<%= label_tag :pay_method, "クレジットカード"  %>
+				<%= label_tag :pay_method, "クレジットカード"  %><br>
 				<%= radio_button_tag :pay_method, :銀行振り込み %>
 				<%= label_tag :pay_method, "銀行振り込み"  %>
 
@@ -19,7 +17,7 @@
 				<%= label_tag :select, "ご自身の住所" %><br>
 				<%= address %><br>
 				<%= radio_button_tag :select, :select_address %>
-				<%= label_tag :select, "登録済み住所から選択" %>
+				<%= label_tag :select, "登録済み住所から選択" %><br>
 				<%= select_tag :address, options_for_select(@shippings.map do |ship|
 			          [ship.postal_code + "  " + ship.address + "  " + ship.name, ship.id]
 			            end) %><br>
@@ -27,27 +25,25 @@
 			<% end %>
 	</div>
 
-	<div class= "col-xs-6">
+	<div class= "col-md-6">
+		<h4>新しいお届け先の登録</h4>
 			<%= form_for(@shipping, url: public_orders_create_shipping_path) do |f| %>
 
-				<div class="field">
-					<%= f.label "郵便番号（ハイフンなし）" %>
-					<%= f.text_field :postal_code %>
-				</div>
+				<table class="table-borderless">
+					<tr>
+						<th><%= f.label "郵便番号（ハイフンなし）" %></th>
+						<td><%= f.text_field :postal_code %></td>
+					</tr>
+					<tr>
+						<th><%= f.label "住所" %></th>
+						<td><%= f.text_field :address %></td>
+					</tr>
+					<tr>
+						<th><%= f.label "宛名" %></th>
+						<td><%= f.text_field :name %></td>
+					</tr>
+				</table>
 
-				<div class="field">
-					<%= f.label "住所" %>
-					<%= f.text_field :address %>
-				</div>
-
-				<div class="field">
-					<%= f.label "宛名" %>
-					<%= f.text_field :name %>
-				</div>
-
-				<div class="actions">
-					<%= f.submit "新規登録", class: "btn btn-primary" %>
-				</div>
-
+						<%= f.submit "新規登録", class: "btn btn-primary" %>
 			<% end %>
 	</div>

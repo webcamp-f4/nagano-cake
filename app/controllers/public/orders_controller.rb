@@ -19,6 +19,9 @@ class Public::OrdersController < ApplicationController
 
 	#注文情報入力画面でボタンを押して情報をsessionに保存
 	def create
+		@shippings = current_customer.shippings
+		@shipping = Shipping.new
+		@order = Order.new
 		session[:pay_method] = params[:pay_method]
 		if params[:select] == "my_address"
 			session[:address] = current_customer.postal_code +

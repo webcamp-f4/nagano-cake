@@ -1,15 +1,27 @@
-<div class= "col-xs-3">
-	<%= render 'sidebar', genres: @genres %>
-</div>
-
 <div class="row">
-  	<div class="col-3 mt-3"> <!--ひとつのブロックをラップしてカラムを指定する-->
-  		<% @items.each do |item| %>
-	        <%= link_to public_item_path(item) do %><!--それをeach文で回す-->
-	        	<%= attachment_image_tag item, :image, size: "50x50", format: 'jpeg', fallback: "img/no-image-mini.jpg", class: 'rounded' %><br>
-	        	<strong class="red-border"><%= item.name %></strong><br>
-	    	<% end %>
-        	<span class="ml-auto"><%= (item.price.to_i * 1.1).floor%>円</span><br>
-        <% end %>
+	<div class= "col-md-3">
+		<%= render 'sidebar', genres: @genres %>
+	</div>
+
+
+  	<div class="col-md-9">
+  		<div class="row">
+  			<h3>
+  				<% if params[:genre_id] %>
+            		<%= @genre.name %>一覧
+         		<% else %>
+         			商品一覧(全<%= @items.where(sales_status: "販売中").count %>件)
+         		<% end %>
+         	</h3>
+		  		<% @items.each do |item| %>
+		  			<div class="col-md-3">
+				        <%= link_to public_item_path(item) do %><!--それをeach文で回す-->
+				        	<%= attachment_image_tag item, :image, size: "200x150", format: 'jpeg', fallback: "img/no-image-mini.jpg" %><br>
+				        	<strong class="red-border"><%= item.name %></strong><br>
+				    	<% end %>
+			        	<span class="ml-auto"><%= (item.price.to_i * 1.1).floor%>円</span><br>
+			        </div>
+		        <% end %>
+    	</div>
   	</div>
 </div>
