@@ -1,5 +1,15 @@
 class Public::OrdersController < ApplicationController
 
+   def index
+   	@orders = Order.where(customer_id:current_customer)
+   end
+
+   def show
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items
+   end
+
+
 
 	def new
 		@shippings = current_customer.shippings
