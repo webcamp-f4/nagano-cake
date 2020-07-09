@@ -15,11 +15,13 @@
 
         <div class="text-center">
           <span>
-            <%= link_to "退会しない", public_customer_path(@customer), class: "btn btn-primary" %>
+            <%= link_to "退会しない", public_customer_path(current_customer), class: "btn btn-primary" %>
           </span>
+          <!-- 注文履歴一覧へ-->
           <span>
-            <%= link_to "退会する", public_customer_path(@customer), class: "btn btn-danger" %>
+            <%= link_to "退会する", public_withdrow_switch_customer_path(@customer), method: :patch, class: "btn btn-danger" %>
           </span>
+          <!-- 会員ステータスを無効に切り替えるswichアクションを呼ぶ-->
         </div>
     </div>
 

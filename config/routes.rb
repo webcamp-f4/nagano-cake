@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get "orders/thanks" => "orders#thanks"
     resources :customers, only: [:show, :update, :edit]
     get "customers/:id/withdraw" => "customers#withdraw"
+    patch '/customers/:id/withdrow' => 'customers#switch', as: 'withdrow_switch_customer' #会員ステータスの切替
     patch "customers/:id/withdraw" => "customers#update"
   	resources :shippings, only: [:index, :create, :destroy, :edit, :update]
   	get "orders/thanks" => "orders#thanks"
