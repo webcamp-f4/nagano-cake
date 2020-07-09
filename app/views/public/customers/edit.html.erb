@@ -1,43 +1,50 @@
-<h1>登録情報編集</h1>
+<div class="row　center">
+  <div class="col-md-2"></div>
 
-<%= form_for @customer,:url => {:action => :update} do |f| %>
+  <div class="col-md-8">
+    <h1 class="text-center">登録情報編集</h1>
 
-<table>
-    <tr>
-      <th>名前</th>
-      <td>（姓）</td>
-      <td><%= f.text_field :last_name_kanji %></td>
-      <td>(名)</td>
-      <td><%= f.text_field :first_name_kanji %></td>
-    </tr>
-    <tr>
-      <th>カナ</th>
-      <td>(セイ）</td>
-      <td><%= f.text_field :last_name_kana %></td>
-      <td>(メイ)</td>
-      <td><%= f.text_field :first_name_kana %></td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th>
-      <td></td>
-      <td><%= f.text_area :email %></td>
-    </tr>
-    <tr>
-      <th>郵便番号(ハイフンなし)</th>
-      <td></td>
-      <td><%= f.number_field :postal_code %></td>
-    </tr>
-    <tr>
-      <th>住所</th>
-      <td></td>
-      <td><%= f.text_area :address %></td>
-    </tr>
-    <tr>
-      <th>電話番号(ハイフンなし)</th>
-      <td></td>
-      <td><%= f.number_field :tel %></td>
-    </tr>
-</table>
-<span><%= f.submit '編集内容を保存する'%></span>
-<span>退会する</span>
-<% end %>
+    <%= form_for @customer,:url => {:action => :update} do |f| %>
+
+      <table class="table">
+        <tr>
+          <th>名前</th>
+          <td> (姓)   <%= f.text_field :last_name_kanji %></td>
+          <td> (名)   <%= f.text_field :first_name_kanji %></td>
+        </tr>
+        <tr>
+          <th>カナ</th>
+          <td>(セイ) <%= f.text_field :last_name_kana %></td>
+          <td>(メイ) <%= f.text_field :first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= f.text_area :email %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>郵便番号(ハイフンなし)</th>
+          <td><%= f.number_field :postal_code %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td><%= f.text_area :address %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>電話番号(ハイフンなし)</th>
+          <td><%= f.number_field :tel %></td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="text-center">
+        <span><%= f.submit '編集内容を保存する', class: "btn btn-success"%></span>
+        <span><%= link_to "退会する" , public_path(@customer), class: "btn btn-danger" %></span>
+      </div>
+    <% end %>
+  </div>
+
+<div class="col-md-2"></div>
+</div>

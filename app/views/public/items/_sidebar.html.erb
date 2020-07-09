@@ -1,0 +1,13 @@
+<div>
+	<div>
+		<strong>ジャンル検索</strong>
+	</div>
+
+	<div>
+		<% genres.each do |genre| %>
+			<%= link_to public_genres_path(genre) do %>
+				<%= genre.name %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

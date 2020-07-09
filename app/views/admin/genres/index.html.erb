@@ -1,21 +1,30 @@
-<p>ジャンル一覧・追加</p>
-<div>
+<div class="row">
+<div class="col-xs-8 col-xs-offset-2">
+<p class="admin-page-title-genre">ジャンル一覧・追加</p>
+<div class="genre-new row">
 	<%= form_for @genre,:url => {:action => :create} do |f| %>
-	<div>
-		<label>ジャンル</label>
+	<div class="col-xs-2">
+		<label>ジャンル</label>		
+	</div>
+	<div class="col-xs-3">
 		<%= f.text_field :name %>
 	</div>
-	<div>
-		<%= f.select :valid_status, Genre.valid_statuses.keys.to_a, {class: 'form-control'} %>
+	<div class="col-xs-2">
+		<label>
+			<%= f.radio_button :valid_status, 1 %>有効
+		</label>
+		<label>
+			<%= f.radio_button :valid_status, 0 %>無効
+		</label>
 	</div>
-	<div>
+	<div class="col-xs-2">
 		<%= f.submit 'ジャンル' %>
 	</div>
 	<% end %>
 </div>
 <div>
 	<% @genres.each do |genre| %>
-	<table>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>ジャンル</th>
@@ -38,4 +47,6 @@
 		</tbody>
 	</table>
 	<% end %>
+</div>
+</div>
 </div>
