@@ -3,8 +3,16 @@ class Public::CustomersController < ApplicationController
        @customer = Customer.find(params[:id])
   end
 
-    def withdraw
+    def withdraw #退会画面を表示するアクション
        @customer = Customer.find(params[:id])
+    end
+
+    def switch
+      @customer = Customer.find(params[:id])
+      if @customer.update(is_deleted: false)
+        sign_out current_customer #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
+      end
+      redirect_to root_path
     end
 
    def update
