@@ -1,13 +1,14 @@
-<div>
+<div class="genre">
 	<div>
 		<strong>ジャンル検索</strong>
 	</div>
 
-	<div>
-		<% genres.each do |genre| %>
+	<% genres.each do |genre| %>
+		<div class="col-md-12">
 			<%= link_to public_genre_items_path(genre) do %>
-				<%= genre.name %>
+				<span><%= genre.name %></span>
 			<% end %>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
+
 </div>

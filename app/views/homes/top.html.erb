@@ -1,34 +1,33 @@
-<div class= "col-xs-3">
-	<%= render 'public/items/sidebar', genres: @genres %>
-</div>
-
-<div class="col-xs-9">
-
-	<section id="top">
-		<p class= "top-text">
-			ようこそ、NaganoCakeへ！<br>
-			このサイトはケーキ販売のECサイトになります。<br>
-			会員でない方も商品の閲覧はできますが、<br>
-			購入には会員登録が必要になります。
-		</p>
-	</section>
-
-	<section id="recommend-items">
-		<h3>オススメ商品<h3>
-			<% @random.each do |item| %>
-				<div>
-				    <%= link_to public_item_path(item) do %>
-				      <%= attachment_image_tag(item, :image, fallback: "img/no-image-mini.jpg",size:"150x100") %>
-				      <%= item.name %>
-	                <% end %>
-	            </div>
-	            <div>
-	                <%= (item.price.to_i*1.10).floor %>円
-	            </div>
-            <% end %>
-	</section>
-
-	<div class="more-items">
-		<%=link_to "もっと見る>", public_items_path %>
+<div class="row">
+	<div class= "col-md-3">
+		<%= render 'public/items/sidebar', genres: @genres %>
 	</div>
+
+	<div class="col-md-9">
+		<section id="top">
+			<p class= "top-text">
+				ようこそ、NaganoCakeへ！<br>
+				このサイトはケーキ販売のECサイトになります。<br>
+				会員でない方も商品の閲覧はできますが、<br>
+				購入には会員登録が必要になります。
+			</p>
+		</section>
+		<section id="recommend-items">
+			<div class="row">
+				<h3>オススメ商品</h3>
+					<% @random.each do |item| %>
+						<div class="col-md-3">
+						    <%= link_to public_item_path(item) do %>
+								<%= attachment_image_tag(item, :image, fallback: "img/no-image-mini.jpg",size:"150x100") %><br>
+								<%= item.name %><br>
+			        		<% end %>
+			                	<%= (item.price.to_i*1.10).floor %>円
+		           		</div>
+	           		<% end %>
+	        </div>
+		</section>
+
+		<div class="more-items">
+			<%=link_to "もっと見る>", public_items_path %>
+		</div>
 </div>
