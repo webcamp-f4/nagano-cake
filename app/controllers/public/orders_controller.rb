@@ -9,8 +9,6 @@ class Public::OrdersController < ApplicationController
     @order_items = @order.order_items
    end
 
-
-
 	def new
 		@shippings = current_customer.shippings
 		@shipping = Shipping.new
@@ -37,8 +35,6 @@ class Public::OrdersController < ApplicationController
 		end
 	end
 
-
-
 	#注文情報入力画面にて新規配送先の登録
 	def create_shipping
 		@shipping = Shipping.new(shipping_params)
@@ -49,7 +45,6 @@ class Public::OrdersController < ApplicationController
 
 	#注文情報確認画面
 	def confirm
-	#	@items = Item.find(params[:id])
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
 		if  session[:address].length <8
@@ -64,7 +59,7 @@ class Public::OrdersController < ApplicationController
 		#オーダーの保存
 		@order = Order.new
 		@order.customer_id = current_customer.id
-		@order.shipping_address = session[:address]
+		@order.address = session[:address]
 		@order.pay_method = session[:pay_method]
 		@order.total_due = calculate(current_customer)
 		@order.status = 0
@@ -72,11 +67,12 @@ class Public::OrdersController < ApplicationController
 		# saveができた段階でOrderモデルにorder_idが入る
 
 		#オーダー商品ごとの詳細の保存
-		current_customer.cart_items.each do |cart_item|
+		current_customer.cart_items.each do |cart|
 			@order_item = OrderItem.new
 			@order_item.order_id = @order.id
-			@order_item.price = cart_item.item.price.to_i
-			@order_item.amount = cart_item.amount
+			@order_detail.item_name = cart.item.name
+			@order_item.price = cart.item.price
+			@order_item.amount = cart.amount
 			@order_item.making_status = 0
 			@order_item.save
 		end
