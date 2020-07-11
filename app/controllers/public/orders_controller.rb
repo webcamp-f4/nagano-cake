@@ -24,13 +24,12 @@ class Public::OrdersController < ApplicationController
 		@order = Order.new
 		session[:pay_method] = params[:pay_method]
 		if params[:select] == "my_address"
-			session[:address] = current_customer.postal_code +
-			current_customer.address + current_customer.last_name_kanji + current_customer.first_name_kanji
+			session[:address] = current_customer.shipping_postal_code+current_customer.shipping_address+current_customer.shipping_name
 		elsif params[:select] == "select_address"
 			session[:address] = params[:address]
 		end
 		if session[:address].present? && session[:pay_method].present?
-			redirect_to public_orders_confirm_path
+			redirect_to public_orders_thanks_path
 		else
 			flash[:order_new] = "支払い方法と配送先を選択して下さい"
 			render "new"
@@ -49,12 +48,10 @@ class Public::OrdersController < ApplicationController
 
 	#注文情報確認画面
 	def confirm
-	#	@items = Item.find(params[:id])
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
-		if  session[:address].length <8
-        	@address = Shipping.find(session[:address])
-      	end
+        @address = Shipping.find(params[:address])
+
 	end
 
 	def thanks
@@ -83,13 +80,18 @@ class Public::OrdersController < ApplicationController
 		current_customer.cart_items.destroy_all
 		session.delete(:address)
 		session.delete(:pay_method)
-		redirect_to public_orders_thanks_path
+		redirect_to public_thanks_order_path
 	end
 
 	private
 	def shipping_params
 		params.require(:shipping).permit(:customer_id, :name, :postal_code, :address)
 	end
+    
+    def order_params
+        params.require(:order).permit(:customer_id, :address, :pay_method, :postage, :total_due, :status)
+    end
+
 
 	def cart_item_params
 		params.require(:cart_item).permit(:item_id, :amount, :customer_id)
