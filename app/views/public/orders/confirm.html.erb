@@ -2,6 +2,7 @@
 
 <div class="row">
 	<div class = "col-xs-9">
+<%= form_with(model:Order.new, url: public_create_order_path, method: :post,local: true) do |f| %>
 		<!--注文商品の情報-->
 		<table class="table table-bordered">
 			<thead class="thead-light">
@@ -54,21 +55,22 @@
 		<table class="table table-bordered">
 			<tr>
 				<th><strong>お支払い方法</strong></th>
-				<td><%= session[:pay_method] %></td>
+				<td><%= params[:pay_method] %></td>
 			</tr>
 			<tr>
 				<th><strong>お届け先</strong></th>
 				<td>
 					<!-- うけとった文字列が8けたより少なければ -->
-						
+						<%= f.hidden_field :pay_method, :value => params[:pay_method] %>
 					<!-- 受け取った文字列がそれ以外なら -->
-						<%= session[:address] %>
+						<%= @address %>
 				</td>
 			</tr>
 		</table>
         <div class="text-center">
-		<%= link_to "購入を確定する", public_create_order_path, class: "btn btn-success" %>
+		<%#= link_to "購入を確定する", public_create_order_path, class: "btn btn-success" %>
 	</div>
-	
+	<%= f.submit "注文を確定する" %>
+	<% end %>
 </div>
 </div>

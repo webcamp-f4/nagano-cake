@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   	resources :orders, only: [:new, :create, :index, :show]
     post '/orders/create_shipping' => 'orders#create_shipping' #情報入力画面での配送先登録用のアクション
     post "/orders/confirm" => "orders#confirm"
-    get '/create_order' => 'orders#create_order' #購入確定のアクション
+    post '/create_order' => 'orders#create_order' #購入確定のアクション
     get "/thanks_order" => "orders#thanks"
     resources :customers, only: [:show, :update, :edit]
     get "customers/:id/withdraw" => "customers#withdraw"

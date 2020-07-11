@@ -50,8 +50,8 @@ class Public::OrdersController < ApplicationController
 	def confirm
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
-        @address = Shipping.find(params[:address])
-
+        @add = current_customer.shippings.find(params[:address])
+        @address = @add.name + @add.address + @add.postal_code
 	end
 
 	def thanks
@@ -62,8 +62,9 @@ class Public::OrdersController < ApplicationController
 		@order = Order.new
 		@order.customer_id = current_customer.id
 		@order.shipping_address = session[:address]
-		@order.pay_method = session[:pay_method]
+		@order.pay_method = params[:order][:pay_method]
 		@order.total_due = calculate(current_customer)
+	#	binding.pry
 		@order.status = 0
 		@order.save
 		# saveができた段階でOrderモデルにorder_idが入る
@@ -73,6 +74,7 @@ class Public::OrdersController < ApplicationController
 			@order_item = OrderItem.new
 			@order_item.order_id = @order.id
 			@order_item.price = cart_item.item.price.to_i
+	#		binding.pry
 			@order_item.amount = cart_item.amount
 			@order_item.making_status = 0
 			@order_item.save
