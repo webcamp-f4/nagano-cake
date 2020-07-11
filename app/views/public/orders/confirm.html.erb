@@ -14,12 +14,11 @@
 			</thead>
 			<tbody>
 				<tr>
-					
 				</tr>
 				<% current_customer.cart_items.each do |cart_item| %>
 					<tr>
 						<td>
-							<%= attachment_image_tag cart_item.item, :image, size: "50×50", fallback: "img/no-image-mini.jpg" %>
+							<%= attachment_image_tag cart_item.item, :image, size: "200x150", format: 'jpeg', fallback: "img/no-image-mini.jpg" %>
 							<%= cart_item.item.name %>
 						</td>
 						<td><%= (cart_item.item.price.to_i * 1.1).floor %></td>
@@ -61,18 +60,15 @@
 				<th><strong>お届け先</strong></th>
 				<td>
 					<!-- うけとった文字列が8けたより少なければ -->
-					<% if  session[:address].length < 8 %>
-						<%= @address.postal_code + "" + @address.address + "" + @address.name %>
+						
 					<!-- 受け取った文字列がそれ以外なら -->
-					<% else %>
 						<%= session[:address] %>
-					<% end %>
 				</td>
 			</tr>
 		</table>
-
-	<div class="text-center">
-		<%=link_to "購入を確定する", public_orders_create_order_path, class: "btn btn-success" %>
+        <div class="text-center">
+		<%= link_to "購入を確定する", public_create_order_path, class: "btn btn-success" %>
 	</div>
+	
 </div>
 </div>

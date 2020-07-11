@@ -7,10 +7,14 @@ class ApplicationController < ActionController::Base
 
 
 	def after_sign_in_path_for(resource)
-    	public_customer_path(resource)
-  end
+		if customer_signed_in?
+    	   public_customer_path(resource)
+    	else
+    	   admin_orders_today_path
+        end
+    end
 
-  def after_sign_out_path_for(resource)
+    def after_sign_out_path_for(resource)
 		root_path(resource)
 	end
 
