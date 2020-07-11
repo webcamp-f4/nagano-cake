@@ -83,19 +83,22 @@ class Public::OrdersController < ApplicationController
 		redirect_to public_thanks_order_path
 	end
 
+
+
+
 	private
+
+
+
 	def shipping_params
 		params.require(:shipping).permit(:customer_id, :name, :postal_code, :address)
 	end
-    
+
     def order_params
         params.require(:order).permit(:customer_id, :address, :pay_method, :postage, :total_due, :status)
     end
 
 
-	def cart_item_params
-		params.require(:cart_item).permit(:item_id, :amount, :customer_id)
-    end
 
 	def calculate(customer)
 		total_price = 0
