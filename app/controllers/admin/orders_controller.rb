@@ -11,15 +11,15 @@ class Admin::OrdersController < ApplicationController
 		@orders = Order.page(params[:page]).reverse_order
 	end
 	def show
-	    @order = Order.find(params[:id])	
+	    @order = Order.find(params[:id])
 	    @order_item = Order_item.all
 	end
 	def update
 	    @order = Order.find(params[:id])
         if @order.update(order_params)
            redirect_to @order
-        else 
+        else
         render "show"
-        end		
+        end
 	end
 end
