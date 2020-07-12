@@ -15,6 +15,7 @@
                   <td>配送先</td>
                     <% if @order.shipping_address.length < 8 %>
                       <% ship_address = Shipping.find(@order.shipping_address) %>
+                    <td class="align-middle">
                       <%= ship_address.postal_code + "  " + ship_address.address + "  " + ship_address.name %>
                     </td>
                     <% else %>
