@@ -24,12 +24,12 @@ class Public::OrdersController < ApplicationController
 		@order = Order.new
 		session[:pay_method] = params[:pay_method]
 		if params[:select] == "my_address"
-			session[:address] = current_customer.shipping_postal_code+current_customer.shipping_address+current_customer.shipping_name
+			session[:address] = current_customer.postal_code + current_customer.address + current_customer.last_name_kanji + current_customer.first_name_kanji
 		elsif params[:select] == "select_address"
 			session[:address] = params[:address]
 		end
 		if session[:address].present? && session[:pay_method].present?
-			redirect_to public_orders_thanks_path
+			redirect_to public_orders_confirm_path
 		else
 			flash[:order_new] = "支払い方法と配送先を選択して下さい"
 			render "new"
@@ -50,8 +50,10 @@ class Public::OrdersController < ApplicationController
 	def confirm
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
-        @add = current_customer.shippings.find(params[:address])
-        @address = @add.name + @add.address + @add.postal_code
+        if session[:address].length <8
+        	@address = Shipping.find(session[:address])
+      	end
+      	binding.pry
 	end
 
 	def thanks
@@ -62,9 +64,9 @@ class Public::OrdersController < ApplicationController
 		@order = Order.new
 		@order.customer_id = current_customer.id
 		@order.shipping_address = session[:address]
-		@order.pay_method = params[:order][:pay_method]
+		@order.pay_method = session[:pay_method]
 		@order.total_due = calculate(current_customer)
-	#	binding.pry
+		#binding.pry
 		@order.status = 0
 		@order.save
 		# saveができた段階でOrderモデルにorder_idが入る
@@ -74,7 +76,7 @@ class Public::OrdersController < ApplicationController
 			@order_item = OrderItem.new
 			@order_item.order_id = @order.id
 			@order_item.price = cart_item.item.price.to_i
-	#		binding.pry
+			#binding.pry
 			@order_item.amount = cart_item.amount
 			@order_item.making_status = 0
 			@order_item.save
