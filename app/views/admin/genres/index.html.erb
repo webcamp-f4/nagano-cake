@@ -2,7 +2,7 @@
 <div class="col-xs-8 col-xs-offset-2">
 <p class="admin-page-title-genre">ジャンル一覧・追加</p>
 <div class="genre-new row">
-	<%= form_for @genre,:url => {:action => :create} do |f| %>
+	<%= form_for(@genre, url: admin_genres_path) do |f| %>
 	<div class="col-xs-2">
 		<label>ジャンル</label>
 	</div>
@@ -10,12 +10,10 @@
 		<%= f.text_field :name %>
 	</div>
 	<div class="col-xs-2">
-		<label>
-			<%= f.radio_button :valid_status, true %>有効
-		</label>
-		<label>
-			<%= f.radio_button :valid_status, false %>無効
-		</label>
+			<%= f.radio_button :valid_status, :true %>
+			<%= f.label :valid_status, "有効" %>
+			<%= f.radio_button :valid_status, :false %>
+			<%= f.label :valid_status, "無効" %>
 	</div>
 	<div class="col-xs-2">
 		<%= f.submit '追加',{class: 'btn btn-info'} %>
@@ -39,7 +37,11 @@
 					<%= genre.name %>
 				</td>
 				<td>
-					<%= genre.valid_status %>
+					<% if genre.valid_status == true %>
+						有効
+					<% else %>
+						無効
+					<% end %>
 				</td>
 				<td class="text-right">
 					<%= link_to "編集する",edit_admin_genre_path(genre), {class: 'btn btn-primary'} %>

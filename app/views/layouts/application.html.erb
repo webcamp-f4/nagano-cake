@@ -11,36 +11,11 @@
 
   <body>
     <header class="navbar navbar-fixed-top" style="background-color:#cd853f;">
-      <div class="container">
-          <nav class="nav navbar-nav navbar-left">
-            <h3 style= "color: white;">NaganoCake</h3>
-          </nav>
-        <% if customer_signed_in? %>
-          <nav class="nav navbar-nav navbar-brand-center">
-              <span style= "color: white;">ようこそ、<%= current_customer.last_name_kana %><%= current_customer.first_name_kana %>さん！</span>
-          </nav>
-          <nav>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "マイページ", public_customer_path(current_customer) %></li>
-              <li><%= link_to "商品一覧", public_items_path %></li>
-              <li><%= link_to "カート", public_cart_items_path %></li>
-              <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
-            </ul>
-          </nav>
-        <% else %>
-          <nav class="nav navbar-nav navbar-brand-center">
-              <span style= "color: white;">ようこそ、ゲストさん！</span>
-          </nav>
-          <nav>
-            <ul class="nav navbar-nav navbar-right">
-                <li><%= link_to "About", about_path %></li>
-                <li><%= link_to "商品一覧", public_items_path %></li>
-                <li><%= link_to "新規登録", new_customer_registration_path %></li>
-                <li><%= link_to "ログイン", new_customer_session_path %></li>
-            </ul>
-          </nav>
-        <% end %>
-      </div>
+      <% if request.fullpath.include? "admin"  %>
+        <%= render 'layouts/admin_header' %>
+      <% else%>
+        <%= render 'layouts/customers_header' %>
+      <% end %>
     </header>
     
     <main>
