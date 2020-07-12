@@ -15,7 +15,7 @@ end
 
 def index
 	@shipping = Shipping.new
-	@shippings = Shipping.all
+	@shippings = current_customer.shippings
 end
 
 
