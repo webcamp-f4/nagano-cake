@@ -53,7 +53,7 @@ class Public::OrdersController < ApplicationController
         if session[:address].length <8
         	@address = Shipping.find(session[:address])
       	end
-      	binding.pry
+      	#binding.pry
 	end
 
 	def thanks
