@@ -53,7 +53,6 @@ class Public::OrdersController < ApplicationController
         if session[:address].length <8
         	@address = Shipping.find(session[:address])
       	end
-      	binding.pry
 	end
 
 	def thanks
@@ -66,18 +65,18 @@ class Public::OrdersController < ApplicationController
 		@order.shipping_address = session[:address]
 		@order.pay_method = session[:pay_method]
 		@order.total_due = calculate(current_customer)
-		#binding.pry
 		@order.status = 0
 		@order.save
 		# saveができた段階でOrderモデルにorder_idが入る
 
 		#オーダー商品ごとの詳細の保存
-		current_customer.cart_items.each do |cart_item|
+		current_customer.cart_items.each do |cart|
 			@order_item = OrderItem.new
 			@order_item.order_id = @order.id
-			@order_item.price = cart_item.item.price.to_i
 			#binding.pry
-			@order_item.amount = cart_item.amount
+			@order_item.name = cart.item.name
+			@order_item.price = cart.item.price
+			@order_item.amount = cart.amount
 			@order_item.making_status = 0
 			@order_item.save
 		end

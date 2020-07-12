@@ -13,12 +13,13 @@
                 </tr>
                 <tr class="brown-border">
                   <td>配送先</td>
-                    <% if @order.shipping_address.length <8 %>
-                    <% ship_address = Shipping.find(@order.shipping_address) %>
-                  <td>
-                    <%= ship_address.shipping_postal_code %>
-                    <%= ship_address.shipping_address %>
-                    <%= ship_address.shipping_name %>
+                    <% if @order.shipping_address.length < 8 %>
+                      <% ship_address = Shipping.find(@order.shipping_address) %>
+                    <td class="align-middle">
+                      <%= ship_address.postal_code + "  " + ship_address.address + "  " + ship_address.name %>
+                    </td>
+                    <% else %>
+                      <td><%= @order.shipping_address %></td>
                     <% end %>
                   <td>
                 </tr>
@@ -46,7 +47,7 @@
                   <% @order_items.each do |d| %>
                     <tbody>
                       <tr class="brown-border">
-                        <td><%= d.items.name %></td>
+                        <td><%= d.name %></td>
                         <td><%= (d.price * 1.1).floor %></td>
                         <td><%= d.amount %></td>
                         <td><%= ((d.price * d.amount) * 1.1).floor %>
