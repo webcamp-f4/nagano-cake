@@ -2,6 +2,10 @@ class Public::OrdersController < ApplicationController
 
    def index
    	@orders = Order.where(customer_id:current_customer)
+        @add = current_customer.shippings.find(params[:address])
+        @address_name = @add.name #+ @add.address + @add.postal_code
+        @address_address = @add.address
+        @address_postal_code = @add.postal_code
    end
 
    def show
@@ -51,7 +55,9 @@ class Public::OrdersController < ApplicationController
 		@orders = current_customer.orders
 		@total_price = calculate(current_customer)
         @add = current_customer.shippings.find(params[:address])
-        @address = @add.name + @add.address + @add.postal_code
+        @address_name = @add.name #+ @add.address + @add.postal_code
+        @address_address = @add.address
+        @address_postal_code = @add.postal_code
 	end
 
 	def thanks

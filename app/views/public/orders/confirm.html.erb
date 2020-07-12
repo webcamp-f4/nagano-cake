@@ -63,7 +63,9 @@
 					<!-- うけとった文字列が8けたより少なければ -->
 						<%= f.hidden_field :pay_method, :value => params[:pay_method] %>
 					<!-- 受け取った文字列がそれ以外なら -->
-						<%= @address %>
+						<span>宛名：      <%= @address_name %></span>
+						<br><span>郵便番号：<%= @address_postal_code %></span>
+						<br><span>住所：<%= @address_address %></span>
 				</td>
 			</tr>
 		</table>
