@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
 	def create
 		@item = Item.new(item_params)
 		@items = Item.all
-        if @item.save 
+        if @item.save
           redirect_to admin_items_path
         else
         redirect_back(fallback_location: admin_items_path)
