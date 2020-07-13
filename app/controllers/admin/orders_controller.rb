@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
 	def today
-		@orders = Order.where(created_at:  Time.zone.now.all_day)
+		@orders = Order.where(created_at: Time.zone.now.all_day)
     end
 	def index
 		@orders = Order.page(params[:page]).reverse_order
