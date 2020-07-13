@@ -1,11 +1,6 @@
 class Admin::OrdersController < ApplicationController
-	def today	
-		@order = Order.all
-		   @order.each do |order|
-		   	if (order[created_at].to_s.match(/#{Date.today.to_s}.+/))
-		   		@date += order[:id]
-		   	end
-		   end
+	def today
+		@orders = Order.where(created_at:  Time.zone.now.all_day)
     end
 	def index
 		@orders = Order.page(params[:page]).reverse_order
