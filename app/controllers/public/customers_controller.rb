@@ -9,9 +9,9 @@ class Public::CustomersController < ApplicationController
 
     def switch
       @customer = Customer.find(params[:id])
-      if @customer.update(is_deleted: false)
-        sign_out current_customer #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
-      end
+      #is_deletedカラムにフラグを立てる(defaultはtrue)
+      @customer.update(is_deleted: false)
+      reset_session #URLを踏ませずにコントローラーから直接サインアウトの指示を出す（device公式)
       redirect_to root_path
     end
 
