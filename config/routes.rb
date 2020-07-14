@@ -38,7 +38,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     get "orders/today" => "orders#today"
-    resources :orders, only: [:index, :show, :update]
+    resources :orders, only: [:index, :show]
+    patch '/orders/:id/ostatus' => 'orders#status_update', as: "status" # 注文ステータスupdate
+    patch '/orders/:id/making_status' => 'orders#making_status_update', as: "making_status" # 製作ステータスupdate
   end
 
 end
