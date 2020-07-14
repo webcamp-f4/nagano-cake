@@ -20,4 +20,12 @@ class Customer < ApplicationRecord
     退会済み: false,
     有効会員: true,
   }, _suffix: true
+
+  def Customer.search(search, select)
+    if select == "1"
+      Customer.where(['last_name_kanji LIKE ?', "%#{search}%"])
+    else
+      Customer.all
+    end
+  end
 end

@@ -1,0 +1,5 @@
+<%= form_tag(admin_search_path, :method => 'get') do %>
+    <%= select_tag(:option, options_for_select([["customer", "1"],["item", "2"],["order", "3"]])) %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索' %>
+<% end %>
