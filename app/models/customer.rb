@@ -20,10 +20,7 @@ class Customer < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :shippings, dependent: :destroy
 
-  enum is_deleted:{
-    退会済み: false,
-    有効会員: true,
-  }, _suffix: true
+
 
 
   def Customer.search(search, select)
