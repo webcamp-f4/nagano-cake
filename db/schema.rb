@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_060656) do
+ActiveRecord::Schema.define(version: 2020_07_13_032326) do
 
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_060656) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: true, null: false
     t.string "last_name_kana"
     t.string "first_name_kana"
     t.text "address"
