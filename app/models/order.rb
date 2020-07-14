@@ -17,4 +17,13 @@ class Order < ApplicationRecord
 
 	validates :pay_method, presence: true
 	validates :shipping_address, presence: true
+
+	def Order.search(search, select)
+        if select == "3"
+          Order.where(['created_at LIKE ?', "%#{search}%"])
+        else
+          Order.all
+        end
+    end
+
 end
