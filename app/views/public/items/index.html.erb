@@ -16,7 +16,7 @@
 		  		<% @items.each do |item| %>
 		  			<div class="col-md-3">
 				        <%= link_to public_item_path(item) do %><!--それをeach文で回す-->
-				        	<%= attachment_image_tag item, :image, size: "200x150", format: 'jpeg', fallback: "img/no-image-mini.jpg" %><br>
+				        	<%= attachment_image_tag item, :image, size: "200x200", format: 'jpeg', fallback: "img/no-image-mini.jpg" %><br>
 				        	<strong class="red-border"><%= item.name %></strong><br>
 				    	<% end %>
 			        	<span class="ml-auto"><%= (item.price.to_i * 1.1).floor%>円</span><br>
