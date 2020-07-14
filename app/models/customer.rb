@@ -4,6 +4,10 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  def active_for_authentication?
+    super && (self.is_deleted == true)
+  end
+
   validates :last_name_kana, presence: true
   validates :first_name_kana, presence: true
   validates :address, presence: true
@@ -21,6 +25,7 @@ class Customer < ApplicationRecord
     有効会員: true,
   }, _suffix: true
 
+
   def Customer.search(search, select)
     if select == "1"
       Customer.where(['last_name_kanji LIKE ?', "%#{search}%"])
@@ -28,4 +33,5 @@ class Customer < ApplicationRecord
       Customer.all
     end
   end
+
 end

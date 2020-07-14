@@ -34,11 +34,9 @@ def update
 end
 
 def destroy
-	@shipping = Shipping.find(params[:id])
-	shipping = current_user
+	shipping = Shipping.find(params[:id])
 	shipping.destroy
-	redirect_to public_shippings_path(@shipping.id)
-	
+	redirect_to public_shippings_path
 end
 
 def shipping_params
